@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
  * @modifyTime
  */
 @Configuration
+//设置WebPackage类不被自动扫描
+//这里的因为WebConfig.java中@EnableWebMvc已经被加载了，这里使用@excludeFilters将其排除掉。
 @ComponentScan(basePackages = {"spittr"},
 		excludeFilters = {
 				@ComponentScan.Filter(type = FilterType.CUSTOM, value = RootConfig.WebPackage.class)
