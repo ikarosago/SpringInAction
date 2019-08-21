@@ -9,8 +9,8 @@
   </head>
   <body>
     <h1>Welcome to Spitter</h1>
-
-    <a href="<c:url value="#" />">Spittles</a> |
-    <a href="<c:url value="#" />">Register</a>
+    <!-- get 方法发送服务器 -->
+    <a href="<c:url value="/spittles" />">Spittles</a> |
+    <a href="<c:url value="/spitter/register" />">Register</a>
   </body>
 </html>
