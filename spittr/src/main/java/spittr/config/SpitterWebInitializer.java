@@ -54,7 +54,7 @@ public class SpitterWebInitializer extends AbstractAnnotationConfigDispatcherSer
 		// 用于实现文件上传
 		registration.setMultipartConfig(
 				//设置上传文件的临时存储目录,文件大小，整个请求大小，所有文件都要写入磁盘
-				new MultipartConfigElement("/tmp/spittr/uploads",
+				new MultipartConfigElement("F:\\myWorkSpace\\tmp\\spittr\\uploads",
 						2097152, 4194304, 0)
 		);
 	}
