@@ -25,26 +25,36 @@ public class SpittleController {
 	@Autowired
 	private SpittleRepository spittleRepository;
 
-	@RequestMapping(method= RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<Spittle> spittles(
-			@RequestParam(value="max", defaultValue=MAX_LONG_AS_STRING) long max,
-			@RequestParam(value="count", defaultValue="20") int count) {
+			@RequestParam(value = "max", defaultValue = MAX_LONG_AS_STRING) long max,
+			@RequestParam(value = "count", defaultValue = "20") int count) {
 		return spittleRepository.findSpittles(max, count);
 	}
 
-	@RequestMapping(value="/{spittleId}", method=RequestMethod.GET)
+	@RequestMapping(value = "/{spittleId}", method = RequestMethod.GET)
 	public String spittle(
 			@PathVariable("spittleId") long spittleId,
 			Model model) {
-		model.addAttribute(spittleRepository.findOne(spittleId));
+		Spittle spittle = spittleRepository.findOne(spittleId);
+		if (spittle == null) {
+			throw new SpittleNotFoundException();
+		}
+
+		model.addAttribute(spittle);
 		return "spittle";
 	}
 
-	@RequestMapping(method=RequestMethod.POST)
-	public String saveSpittle(SpittleForm form, Model model) throws Exception {
+	@RequestMapping(method = RequestMethod.POST)
+	public String saveSpittle(SpittleForm form, Model model) throws DuplicateSpittleException {
 		spittleRepository.save(new Spittle(null, form.getMessage(), new Date(),
 				form.getLongitude(), form.getLatitude()));
 		return "redirect:/spittles";
+	}
+
+	@ExceptionHandler(DuplicateSpittleException.class)
+	public String handleNotFound() {
+		return "error/duplicate";
 	}
 
 }
