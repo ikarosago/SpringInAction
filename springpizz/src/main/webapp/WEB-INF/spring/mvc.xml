@@ -9,7 +9,7 @@
 
   <!-- View resolver for the pizza flow, as shown on page 594 -->
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="prefix" value="/WEB-INF/jsp/" />
+    <property name="prefix" value="/WEB-INF/oldjsps/" />
     <property name="suffix" value=".jsp" />
   </bean>
 
